@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 
 :root {
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
   --primary-500: #38bdf8;
   --primary-600: #0284c7;
   --secondary-500: #22c55e;
