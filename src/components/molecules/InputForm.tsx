@@ -1,8 +1,9 @@
 "use client";
-import clsx from "clsx";
-import { useLocale } from "next-intl";
 import { forwardRef, useState } from "react";
-import { Eye, EyeOff } from "@/assets/icons/icons";
+import { Eye, EyeOff } from "@/assets/icons";
+
+const cx = (...classes: Array<string | false | null | undefined>) =>
+  classes.filter(Boolean).join(" ");
 
 interface InputFormProps extends React.InputHTMLAttributes<HTMLInputElement> {
   width?: "w-full" | "w-fit";
@@ -23,7 +24,7 @@ const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
   ) => {
     const [show, setShow] = useState(false);
     const isPassword = type === "password";
-    const locale = useLocale();
+    const isRTL = typeof document !== "undefined" && document.documentElement.dir === "rtl";
 
     return (
       <div className="relative w-full">
@@ -34,14 +35,11 @@ const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
           value={value}
           onChange={onChange}
           {...rest}
-          className={clsx(
+          className={cx(
             width,
             "h-10 px-2 rounded-md border-1 border-[#00B7C1] p-3/75 outline-none placeholder:text-gray-400",
             className,
-            {
-              "text-right placeholder:text-right": locale === "ar",
-              "text-left placeholder:text-left": locale !== "ar",
-            },
+            isRTL ? "text-right placeholder:text-right" : "text-left placeholder:text-left",
           )}
         />
 
@@ -49,9 +47,9 @@ const InputForm = forwardRef<HTMLInputElement, InputFormProps>(
           <button
             type="button"
             onClick={() => setShow((prev) => !prev)}
-            className={clsx(
+            className={cx(
               "absolute top-1/2 -translate-y-1/2 text-gray-500",
-              locale === "ar" ? "left-3" : "right-3",
+              isRTL ? "left-3" : "right-3",
             )}
           >
             {show ? <EyeOff size={18} /> : <Eye size={18} />}
