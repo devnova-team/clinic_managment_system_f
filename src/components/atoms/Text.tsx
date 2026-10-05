@@ -29,9 +29,7 @@ export default function Text({
   const variants = {
     primary: "ds-text-primary",
     alt: "ds-text-alt",
-
     secondary: "ds-text-secondary",
-    alt: "ds-text-alt",
     disabled: "ds-text-disabled",
     white: "ds-text-white",
     dark: "text-gray-600",

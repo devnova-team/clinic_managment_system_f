@@ -65,8 +65,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             className={cn(
               "bg-disabled w-full rounded-md !py-3 !px-2",
-              leftIcon && "!px-10",
-              rightIcon && "!px-10",
+             !!leftIcon && "!px-10",
+              !!rightIcon && "!px-10",
               border && "border ds-border-muted" ,
               error && "border border-red-500",
               className
