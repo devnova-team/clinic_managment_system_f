@@ -1,0 +1,85 @@
+{
+  "name": "Clinic Management System Design Tokens",
+  "version": "1.0.0",
+  "font": {
+    "family": "Inter",
+    "weights": [400, 500, 600, 700]
+  },
+  "colors": {
+    "primitive": {
+      "sky500": "#38BDF8",
+      "sky600": "#0EA5E9",
+      "green600": "#16A34A",
+      "red600": "#DC2626",
+      "gray700": "#374151",
+      "slate950": "#0F172A",
+      "slate600": "#475569",
+      "slate400": "#94A3B8",
+      "slate200": "#E2E8F0",
+      "slate100": "#F1F5F9",
+      "white": "#FFFFFF"
+    },
+    "semantic": {
+      "light": {
+        "bg": "#F8FAFC",
+        "surface": "#FFFFFF",
+        "textPrimary": "#0F172A",
+        "textSecondary": "#475569",
+        "border": "#E2E8F0",
+        "primary": "#38BDF8",
+        "primaryHover": "#0EA5E9",
+        "secondary": "#16A34A",
+        "success": "#16A34A",
+        "successSoft": "#DCFCE7",
+        "danger": "#DC2626",
+        "dangerSoft": "#FEE2E2",
+        "pending": "#374151",
+        "pendingSoft": "#E5E7EB"
+      },
+      "dark": {
+        "bg": "#0B1120",
+        "surface": "#111827",
+        "textPrimary": "#F8FAFC",
+        "textSecondary": "#CBD5E1",
+        "border": "#334155",
+        "primary": "#38BDF8",
+        "primaryHover": "#0EA5E9",
+        "secondary": "#16A34A",
+        "success": "#16A34A",
+        "successSoft": "#14532D",
+        "danger": "#DC2626",
+        "dangerSoft": "#7F1D1D",
+        "pending": "#374151",
+        "pendingSoft": "#4B5563"
+      }
+    }
+  },
+  "typography": {
+    "h1": {"fontSize": 48, "lineHeight": 56, "fontWeight": 700},
+    "h2": {"fontSize": 36, "lineHeight": 44, "fontWeight": 700},
+    "h3": {"fontSize": 24, "lineHeight": 32, "fontWeight": 700},
+    "body": {"fontSize": 18, "lineHeight": 28, "fontWeight": 400},
+    "small": {"fontSize": 15, "lineHeight": 22, "fontWeight": 400}
+  },
+  "spacing": [4, 8, 12, 16, 24, 32, 40, 48, 64],
+  "radius": {"sm": 6, "md": 10, "lg": 16, "pill": 999},
+  "shadow": {
+    "sm": "0 1px 2px rgba(15,23,42,0.06)",
+    "md": "0 8px 24px rgba(15,23,42,0.10)",
+    "lg": "0 16px 40px rgba(15,23,42,0.14)"
+  },
+  "components": {
+    "button": ["primary", "secondary", "success", "danger", "disabled"],
+    "input": ["default", "focus", "error", "disabled"],
+    "card": ["default", "interactive"],
+    "modal": ["default", "confirmation", "danger"],
+    "badge": ["confirmed", "completed", "cancelled", "pending", "suspended"],
+    "shared": ["table", "select", "dateTimePicker", "tabs", "toast", "emptyState", "loadingState", "errorState", "searchField", "pagination", "avatar"]
+  },
+  "responsive": {
+    "mobile": "< 640px",
+    "tablet": "640px–1023px",
+    "desktop": ">= 1024px"
+  },
+  "roles": ["Owner", "Receptionist", "Doctor", "Patient"]
+}
