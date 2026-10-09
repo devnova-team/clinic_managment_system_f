@@ -1,44 +1,230 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+/* =========================================================
+   CLINIC MANAGEMENT SYSTEM
+   Global Design System
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. Primitive / Semantic Design Tokens
+   --------------------------------------------------------- */
 
 :root {
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --primary-500: #38bdf8;
-  --primary-600: #0284c7;
-  --secondary-500: #22c55e;
-  --success-500: #22c55e;
-  --danger-500: #ef4444;
-  --pending-500: #475569;
-  --background: #f8fafc;
-  --surface: #ffffff;
-  --foreground: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
+  /* Colors */
+  --clinic-bg: #f8fafc;
+  --clinic-surface: #ffffff;
+
+  --clinic-text-primary: #0f172a;
+  --clinic-text-secondary: #475569;
+
+  --clinic-border: #e2e8f0;
+
+  --clinic-primary: #38bdf8;
+  --clinic-primary-hover: #0ea5e9;
+
+  --clinic-secondary: #16a34a;
+
+  --clinic-success: #16a34a;
+  --clinic-success-soft: #dcfce7;
+
+  --clinic-danger: #dc2626;
+  --clinic-danger-soft: #fee2e2;
+
+  --clinic-pending: #374151;
+  --clinic-pending-soft: #e5e7eb;
+
+  /* Primitive colors */
+  --clinic-sky-500: #38bdf8;
+  --clinic-sky-600: #0ea5e9;
+
+  --clinic-green-600: #16a34a;
+  --clinic-red-600: #dc2626;
+
+  --clinic-gray-700: #374151;
+
+  --clinic-slate-950: #0f172a;
+  --clinic-slate-600: #475569;
+  --clinic-slate-400: #94a3b8;
+  --clinic-slate-200: #e2e8f0;
+  --clinic-slate-100: #f1f5f9;
+  --clinic-white: #ffffff;
+
+  /* Radius */
+  --clinic-radius-sm: 6px;
+  --clinic-radius-md: 10px;
+  --clinic-radius-lg: 16px;
+  --clinic-radius-pill: 999px;
+
+  /* Shadows */
+  --clinic-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --clinic-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.10);
+  --clinic-shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.14);
 }
 
+/* ---------------------------------------------------------
+   2. Dark Theme
+   --------------------------------------------------------- */
+
 .dark {
-  --background: #0f172a;
-  --surface: #1e293b;
-  --foreground: #f8fafc;
-  --muted: #94a3b8;
-  --border: #334155;
+  --clinic-bg: #0b1120;
+  --clinic-surface: #111827;
+
+  --clinic-text-primary: #f8fafc;
+  --clinic-text-secondary: #cbd5e1;
+
+  --clinic-border: #334155;
+
+  --clinic-primary: #38bdf8;
+  --clinic-primary-hover: #0ea5e9;
+
+  --clinic-secondary: #16a34a;
+
+  --clinic-success: #16a34a;
+  --clinic-success-soft: #14532d;
+
+  --clinic-danger: #dc2626;
+  --clinic-danger-soft: #7f1d1d;
+
+  --clinic-pending: #374151;
+  --clinic-pending-soft: #4b5563;
 }
+
+/* ---------------------------------------------------------
+   3. Tell Tailwind about our Design Tokens
+   --------------------------------------------------------- */
+
+@theme inline {
+  /* Colors */
+  --color-clinic-bg: var(--clinic-bg);
+  --color-clinic-surface: var(--clinic-surface);
+
+  --color-clinic-primary: var(--clinic-primary);
+  --color-clinic-primary-hover: var(--clinic-primary-hover);
+
+  --color-clinic-secondary: var(--clinic-secondary);
+
+  --color-clinic-success: var(--clinic-success);
+  --color-clinic-success-soft: var(--clinic-success-soft);
+
+  --color-clinic-danger: var(--clinic-danger);
+  --color-clinic-danger-soft: var(--clinic-danger-soft);
+
+  --color-clinic-pending: var(--clinic-pending);
+  --color-clinic-pending-soft: var(--clinic-pending-soft);
+
+  --color-clinic-text-primary: var(--clinic-text-primary);
+  --color-clinic-text-secondary: var(--clinic-text-secondary);
+
+  --color-clinic-border: var(--clinic-border);
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --text-h1: 48px;
+  --text-h1--line-height: 56px;
+
+  --text-h2: 36px;
+  --text-h2--line-height: 44px;
+
+  --text-h3: 24px;
+  --text-h3--line-height: 32px;
+
+  --text-body: 18px;
+  --text-body--line-height: 28px;
+
+  --text-small: 15px;
+  --text-small--line-height: 22px;
+
+  /* Radius */
+  --radius-sm: var(--clinic-radius-sm);
+  --radius-md: var(--clinic-radius-md);
+  --radius-lg: var(--clinic-radius-lg);
+  --radius-pill: var(--clinic-radius-pill);
+
+  /* Shadows */
+  --shadow-clinic-sm: var(--clinic-shadow-sm);
+  --shadow-clinic-md: var(--clinic-shadow-md);
+  --shadow-clinic-lg: var(--clinic-shadow-lg);
+
+  /* Spacing scale */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+}
+
+/* ---------------------------------------------------------
+   4. Manual Dark Mode
+   --------------------------------------------------------- */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------
+   5. Global HTML / Body
+   --------------------------------------------------------- */
 
 html,
 body {
   min-height: 100%;
 }
 
+html {
+  background-color: var(--clinic-bg);
+}
+
 body {
   margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--clinic-bg);
+  color: var(--clinic-text-primary);
+  font-family: var(--font-sans);
 }
+
+/* ---------------------------------------------------------
+   6. Box sizing
+   --------------------------------------------------------- */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------
+   7. Focus Accessibility
+   --------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--clinic-primary);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------
+   8. Form controls inherit typography
+   --------------------------------------------------------- */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ---------------------------------------------------------
+   9. Reduced motion
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
