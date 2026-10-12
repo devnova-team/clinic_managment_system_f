@@ -1,14 +1,24 @@
-import type { ReactNode } from 'react';
+ 'use client';
+
+import React from 'react';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
+interface AppShellProps {
+  children: React.ReactNode;
+}
 
-export function AppShell({ children }: { children: ReactNode }) {
+export default function AppShell({ children }: AppShellProps) {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <Navbar />
-      <div className="flex min-h-[calc(100vh-4rem)]">
-        <Sidebar />
-        <main className="min-w-0 flex-1 p-4 md:p-6">{children}</main>
+    <div className="min-h-screen bg-gray-50 flex" dir="rtl">
+      {/* القائمة الجانبية */}
+      <Sidebar />
+
+      {/* منطقة المحتوى والشريط العلوي */}
+      <div className="flex-1 flex flex-col min-w-0">
+        <Navbar />
+        <main className="p-6 md:p-8 flex-1 overflow-y-auto">
+          {children}
+        </main>
       </div>
     </div>
   );
