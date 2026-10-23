@@ -1,171 +1,184 @@
-
 "use client";
 
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import React, { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { LoginCredentials } from "../types/auth.types";
 
-import { login } from "../services/auth.service";
-import type { LoginCredentials, UserRole } from "../types/auth.types";
-import { CheckCircle2, Eye, EyeOff } from "@/assets/icons/icons";
-
-const roleRoutes: Record<UserRole, string> = {
-  admin: "/admin",
-  owner: "/dashboard",
-  doctor: "/queue",
-  receptionist: "/reception",
-  patient: "/patient",
-};
-
-export function LoginForm() {
+export const LoginForm: React.FC = () => {
   const router = useRouter();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState<LoginCredentials>({
+    identifier: "",
+    password: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleUsernameChange(event: ChangeEvent<HTMLInputElement>) {
-    setUsername(event.target.value);
-    setError("");
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-    setError("");
-  }
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError("");
-    setLoginSuccess(false);
-
-    const credentials: LoginCredentials = {
-      username: username.trim(),
-      password,
-    };
-
-    if (!credentials.username || !credentials.password) {
-      setError("Please enter your username and password.");
-      return;
-    }
-
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
     setIsLoading(true);
 
     try {
-      const result = await login(credentials);
-      const role = result.user?.role ?? result.role;
-
-      if (!role) {
-        setError("Unable to identify your account role. Please contact support.");
-        return;
-      }
-
-      setLoginSuccess(true);
-      router.replace(roleRoutes[role]);
-      router.refresh();
+      // هنا يتم استدعاء auth.service.ts لاحقاً
+      // await authService.login(formData);
+      console.log("Logging in with:", formData);
+      router.push("/reception"); // أو التوجيه حسب الصلاحية
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Invalid username or password."
-      );
+      setError("Invalid email/username or password.");
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="w-full flex min-h-screen items-center justify-center bg-[#052E2B] px-4 py-10">
-    <section className="w-full max-w-md rounded-2xl border border-clinic-border bg-clinic-surface p-8 shadow-clinic-md">
-      <div className="mb-6 text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-clinic-ink">
-          Welcome back
-        </h1>
-        <p className="mt-2 text-sm text-clinic-muted">
-          One workspace for your clinic team to coordinate.
-        </p>
+    <div className="w-full max-w-[400px] rounded-3xl bg-white p-8 sm:p-10 shadow-[0_20px_50px_rgba(8,40,46,0.1)] border border-slate-100">
+      {/* Top Badge: STAFF LOGIN */}
+      <div className="inline-flex items-center gap-2 rounded-full bg-[#E6F7F5] px-3.5 py-1.5 mb-6">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-[#0F766E]"
+        >
+          <path
+            d="M17 11V8C17 5.23858 14.7614 3 12 3C9.23858 3 7 5.23858 7 8V11M7 11H5C3.89543 11 3 11.8954 3 13V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V13C21 11.8954 20.1046 11 19 11H7Z"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <span className="text-[11px] font-bold tracking-wider text-[#0F766E] uppercase">
+          Staff Login
+        </span>
       </div>
 
-      {loginSuccess && (
-        <div className="mb-5 flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-700">
-          <CheckCircle2 size={18} className="shrink-0" />
-          <span>Login successful! Redirecting to your dashboard...</span>
-        </div>
-      )}
+      {/* Heading */}
+      <h1 className="text-[28px] font-bold text-[#0B252C] leading-tight">
+        Welcome back
+      </h1>
+      <p className="mt-1.5 text-[13px] text-slate-500">
+        Sign in to Clinic Management System
+      </p>
 
+      {/* Error Message */}
       {error && (
-        <div
-          role="alert"
-          aria-live="polite"
-          className="mb-5 rounded-lg border border-clinic-danger/30 bg-clinic-danger-soft p-3 text-sm text-clinic-danger"
-        >
+        <div className="mt-4 rounded-lg bg-red-50 p-3 text-xs font-medium text-red-600 border border-red-100">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-        <div>
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+        {/* Email / Username */}
+        <div className="space-y-1.5">
           <label
-            htmlFor="username"
-            className="mb-1.5 block text-sm font-medium text-clinic-ink"
+            htmlFor="identifier"
+            className="block text-xs font-semibold text-slate-700"
           >
-            Username <span className="text-clinic-danger">*</span>
+            Email / Username
           </label>
           <input
-            id="username"
-            name="username"
+            id="identifier"
+            name="identifier"
             type="text"
-            value={username}
-            onChange={handleUsernameChange}
-            placeholder="Enter your username"
-            className="w-full rounded-lg border border-clinic-border bg-white px-3.5 py-2.5 text-sm text-clinic-ink placeholder:text-slate-400 focus:border-clinic-primary focus:outline-none focus:ring-2 focus:ring-clinic-primary/20"
+            required
+            placeholder="Enter credentials"
+            value={formData.identifier}
+            onChange={handleChange}
+            className="w-full h-[46px] rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E]/15 transition-all"
           />
         </div>
 
-        <div>
+        {/* Password */}
+        <div className="space-y-1.5">
           <label
             htmlFor="password"
-            className="mb-1.5 block text-sm font-medium text-clinic-ink"
+            className="block text-xs font-semibold text-slate-700"
           >
-            Password <span className="text-clinic-danger">*</span>
+            Password
           </label>
-          <div className="relative">
-            <input
-              id="password"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="Enter your password"
-              className="w-full rounded-lg border border-clinic-border bg-white px-3.5 py-2.5 pr-10 text-sm text-clinic-ink placeholder:text-slate-400 focus:border-clinic-primary focus:outline-none focus:ring-2 focus:ring-clinic-primary/20"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword((current) => !current)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition hover:text-slate-600"
-              aria-label={showPassword ? "Hide password" : "Show password"}
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            placeholder="••••••••"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full h-[46px] rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E]/15 transition-all"
+          />
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full rounded-lg bg-clinic-primary px-4 py-3 font-semibold text-slate-950 transition hover:bg-clinic-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinic-primary disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full h-[48px] rounded-xl bg-[#0F766E] hover:bg-[#0D645D] active:scale-[0.99] text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-60"
         >
-          {isLoading ? "Signing in..." : "Sign In"}
+          <span>{isLoading ? "Signing in..." : "Login"}</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
         </button>
       </form>
-       {/* Card Footer */}
-        <div className="mt-8 pt-5 border-t border-[#e2e8f0]/80 dark:border-slate-800 text-center">
-          <p className="text-xs text-[#64748b] dark:text-slate-400 font-normal">
-            Need access? Contact your clinic administrator.
-          </p>
-        </div>
-    </section>
+
+      {/* MFA Notice Banner */}
+      <div className="mt-5 flex items-center gap-3 rounded-xl bg-[#E8F4F2] px-3.5 py-3">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-[#0F766E] shrink-0"
+        >
+          <path
+            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="m9 12 2 2 4-4"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <span className="text-[11px] font-medium text-[#0F766E]">
+          Owner account → MFA verification after login
+        </span>
+      </div>
+
+      {/* Footer Links */}
+      <div className="mt-7 pt-5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+        <span className="text-slate-500">Authorized clinic staff only</span>
+        <Link
+          href="/public-tracking"
+          className="font-bold text-[#0F766E] hover:underline flex items-center gap-1"
+        >
+          Track an appointment →
+        </Link>
+      </div>
     </div>
   );
-}
+};

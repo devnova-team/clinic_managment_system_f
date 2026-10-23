@@ -1,5 +1,5 @@
 import Image from "next/image";
-import heroDoctor from "@/assets/images/HeroSection.png";
+import heroDoctor from "@/assets/images/HeroSection0.png";
 import { ButtonLink } from "@/components/atoms/ButtonLink";
 import { LineIcon } from "@/components/atoms/LineIcon";
 import { SectionEyebrow } from "@/components/atoms/SectionEyebrow";

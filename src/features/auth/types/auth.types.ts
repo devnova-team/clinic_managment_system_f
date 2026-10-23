@@ -1,23 +1,14 @@
-export type UserRole =
-  | "admin"
-  | "owner"
-  | "doctor"
-  | "receptionist"
-  | "patient";
-
 export interface LoginCredentials {
-  username: string;
+  identifier: string; // Email or Username
   password: string;
 }
 
-export interface AuthUser {
-  id?: string;
-  username: string;
-  role: UserRole;
-}
-
-export interface LoginResponse {
-  user?: AuthUser;
-  role?: UserRole;
-  accessToken?: string;
+export interface AuthResponse {
+  user: {
+    id: string;
+    name: string;
+    role: 'owner' | 'doctor' | 'receptionist';
+    requiresMfa?: boolean;
+  };
+  token: string;
 }
