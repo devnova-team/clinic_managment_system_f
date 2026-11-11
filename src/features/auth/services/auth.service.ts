@@ -1,26 +1,15 @@
-
-import type {
-  LoginCredentials,
-  LoginResponse,
-} from "../types/auth.types";
+import type { AuthResponse, LoginCredentials } from "../types/auth.types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function login(
-  credentials: LoginCredentials
-): Promise<LoginResponse> {
-  if (!API_BASE_URL) {
-    throw new Error("API URL is not configured.");
-  }
+export async function login(credentials: LoginCredentials): Promise<AuthResponse> {
+  if (!API_BASE_URL) throw new Error("API URL is not configured.");
 
   let response: Response;
-
   try {
     response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
   } catch {
@@ -30,10 +19,20 @@ export async function login(
   if (response.status === 401 || response.status === 403) {
     throw new Error("Invalid username or password.");
   }
+  if (!response.ok) throw new Error("Login failed. Please try again.");
 
-  if (!response.ok) {
-    throw new Error("Login failed. Please try again.");
+  return (await response.json()) as AuthResponse;
+}
+
+export async function logout(): Promise<void> {
+  try {
+    await fetch(`${API_BASE_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+  } finally {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("session");
+    }
   }
-
-  return (await response.json()) as LoginResponse;
 }

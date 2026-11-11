@@ -3,12 +3,16 @@ export interface LoginCredentials {
   password: string;
 }
 
+export type UserRole = "owner" | "doctor" | "receptionist";
+
+export interface AuthUser {
+  id: string;
+  name: string;
+  role: UserRole;
+  requiresMfa?: boolean;
+}
+
 export interface AuthResponse {
-  user: {
-    id: string;
-    name: string;
-    role: 'owner' | 'doctor' | 'receptionist';
-    requiresMfa?: boolean;
-  };
+  user: AuthUser;
   token: string;
 }
