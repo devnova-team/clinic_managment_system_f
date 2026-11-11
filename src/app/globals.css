@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* =========================================================
-   My Clinic: Global Styles
-   Source: My Clinic.html (prototype) + screenshots
+    CLINIC MANAGEMENT SYSTEM
+    Global Design System
    ========================================================= */
 
 @theme {
@@ -82,9 +82,13 @@
   --shadow-card: 0 14px 34px -18px rgba(11, 42, 46, 0.28);
 
   /* Fonts */
-  --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  --font-arabic: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display:
+    "Bricolage Grotesque", "Plus Jakarta Sans", "IBM Plex Sans Arabic",
+    system-ui, sans-serif;
+  --font-body:
+    "Plus Jakarta Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-arabic:
+    "IBM Plex Sans Arabic", "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 /* ---------- Base ---------- */
