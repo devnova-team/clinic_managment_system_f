@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/cn";
-import { ReactNode, TextareaHTMLAttributes } from "react";
+import type { ReactNode, TextareaHTMLAttributes } from "react";
 import Text from "./Text";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -25,24 +25,20 @@ export default function Textarea({
     <>
       {label && (
         <label htmlFor={id}>
-          <Text variant="primary"> {label}</Text>
+          <Text variant="primary">{label}</Text>
         </label>
       )}
       <textarea
         id={id}
         className={cn(
-          "bg-disabled w-full rounded-md !px-3 !py-3",
-          border && "border border-[var(--color-text-disabled)]",
-          error && "border border-red-500",
+          "w-full min-h-[140px] resize-y rounded-control bg-surface px-[15px] py-[13px] placeholder:text-muted",
+          border ? "border border-line" : "border border-transparent",
+          error && "border-danger",
           className
         )}
         {...props}
       />
-      {error && (
-        <Text variant="disabled" className="text-red-500">
-          {error}
-        </Text>
-      )}
+      {error && <Text variant="disabled" className="text-danger">{error}</Text>}
       {children}
     </>
   );
