@@ -1,13 +1,30 @@
 import { cn } from "@/lib/cn";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
-interface Props {
+interface TitleProps {
   size?: "sm" | "base" | "md" | "lg" | "xl";
-  variant?: "primary" | "secondary" | "disabled" | "white" | "alt"|'dark';
+  variant?: "primary" | "secondary" | "disabled" | "white" | "alt" | "dark";
   className?: string;
   center?: boolean;
   children: ReactNode;
 }
+
+const sizes = {
+  sm: "text-[15px]",
+  base: "text-base",
+  md: "text-lg",
+  lg: "text-[21px]",
+  xl: "text-[28px]",
+};
+
+const variants = {
+  primary: "text-ink",
+  secondary: "text-muted",
+  disabled: "text-muted opacity-60",
+  white: "text-white",
+  alt: "text-brand",
+  dark: "text-muted",
+};
 
 export default function Title({
   size = "base",
@@ -15,30 +32,14 @@ export default function Title({
   className = "",
   center = false,
   children,
-}: Props) {
-  const sizes = {
-    sm: "ds-text-sm",
-    base: "text-base",
-    md: "ds-text-md",
-    lg: "ds-text-lg",
-    xl: "ds-text-xl",
-  };
-
-  const variants = {
-    primary: "ds-text-primary",
-    secondary: "ds-text-secondary",
-    disabled: "ds-text-disabled",
-    white: "ds-text-white",
-    dark: "text-gray-600",
-    alt: "ds-text-alt",
-  };
+}: TitleProps) {
   return (
     <h2
       className={cn(
-        "font-semibold",
+        "font-display font-bold tracking-[-0.01em]",
         sizes[size],
         variants[variant],
-        center ? "text-center" : "",
+        center && "text-center",
         className
       )}
     >

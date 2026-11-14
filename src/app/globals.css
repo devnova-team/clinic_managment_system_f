@@ -1,192 +1,97 @@
 @import "tailwindcss";
 
 /* =========================================================
-   CLINIC MANAGEMENT SYSTEM
-   Global Design System
+    CLINIC MANAGEMENT SYSTEM
+    Global Design System
    ========================================================= */
 
-/* ---------------------------------------------------------
-   1. Primitive / Semantic Design Tokens
-   --------------------------------------------------------- */
+@theme {
+  /* Surfaces */
+  --color-bg: #f3f5f4;
+  --color-surface: #ffffff;
+  --color-soft: #eaf5f3;
+  --color-line: #dde6e4;
 
-:root {
-  /* Colors */
-  --clinic-bg: #f8fafc;
-  --clinic-surface: #ffffff;
+  /* Text */
+  --color-ink: #0b2a2e;
+  --color-muted: #4b6467;
 
-  --clinic-text-primary: #0f172a;
-  --clinic-text-secondary: #475569;
+  /* Brand */
+  --color-brand: #0d7068;
+  --color-brand-ink: #ffffff;
+  --color-mint: #3fdcc4;
+  --color-mint-ink: #06302c;
 
-  --clinic-border: #e2e8f0;
+  /* Dark rail and dark cards */
+  --color-rail: #0b2a2e;
+  --color-rail-soft: #13373b;
+  --color-rail-deep: #10302f;
+  --color-rail-ink: #d7ece8;
+  --color-rail-muted: #8fb1ad;
+  --color-rail-text: #a9c7c3;
+  --color-rail-kpi: #8fd3c9;
 
-  --clinic-primary: #38bdf8;
-  --clinic-primary-hover: #0ea5e9;
+  /* Feedback */
+  --color-danger: #a8241f;
+  --color-danger-ink: #ffffff;
+  --color-warn: #e29a1b;
+  --color-warn-bg: #fdf0d5;
+  --color-warn-ink: #6b4200;
+  --color-ok: #0b8f85;
+  --color-bad: #8f2a28;
 
-  --clinic-secondary: #16a34a;
+  /* Charts and progress */
+  --color-bar: #33a99f;
+  --color-bar-hi: #0d6a63;
 
-  --clinic-success: #16a34a;
-  --clinic-success-soft: #dcfce7;
+  /* Appointment status tones */
+  --color-s-sch-bg: #e3ecf9;
+  --color-s-sch-fg: #1d4e8f;
+  --color-s-chk-bg: #fdf0d5;
+  --color-s-chk-fg: #7a4a00;
+  --color-s-con-bg: #d9f3ef;
+  --color-s-con-fg: #0b5e56;
+  --color-s-cmp-bg: #e4eadf;
+  --color-s-cmp-fg: #2f4a25;
+  --color-s-can-bg: #f9e1e0;
+  --color-s-can-fg: #8f1f1b;
 
-  --clinic-danger: #dc2626;
-  --clinic-danger-soft: #fee2e2;
-
-  --clinic-pending: #374151;
-  --clinic-pending-soft: #e5e7eb;
-
-  /* Primitive colors */
-  --clinic-sky-500: #38bdf8;
-  --clinic-sky-600: #0ea5e9;
-
-  --clinic-green-600: #16a34a;
-  --clinic-red-600: #dc2626;
-
-  --clinic-gray-700: #374151;
-
-  --clinic-slate-950: #0f172a;
-  --clinic-slate-600: #475569;
-  --clinic-slate-400: #94a3b8;
-  --clinic-slate-200: #e2e8f0;
-  --clinic-slate-100: #f1f5f9;
-  --clinic-white: #ffffff;
-
-  /* Radius */
-  --clinic-radius-sm: 6px;
-  --clinic-radius-md: 10px;
-  --clinic-radius-lg: 16px;
-  --clinic-radius-pill: 999px;
-
-  /* Shadows */
-  --clinic-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --clinic-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.10);
-  --clinic-shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.14);
-}
-
-/* ---------------------------------------------------------
-   2. Dark Theme
-   --------------------------------------------------------- */
-
-.dark {
-  --clinic-bg: #0b1120;
-  --clinic-surface: #111827;
-
-  --clinic-text-primary: #f8fafc;
-  --clinic-text-secondary: #cbd5e1;
-
-  --clinic-border: #334155;
-
-  --clinic-primary: #38bdf8;
-  --clinic-primary-hover: #0ea5e9;
-
-  --clinic-secondary: #16a34a;
-
-  --clinic-success: #16a34a;
-  --clinic-success-soft: #14532d;
-
-  --clinic-danger: #dc2626;
-  --clinic-danger-soft: #7f1d1d;
-
-  --clinic-pending: #374151;
-  --clinic-pending-soft: #4b5563;
-}
-
-/* ---------------------------------------------------------
-   3. Tell Tailwind about our Design Tokens
-   --------------------------------------------------------- */
-
-@theme inline {
-  /* Colors */
-  --color-clinic-bg: var(--clinic-bg);
-  --color-clinic-surface: var(--clinic-surface);
-
-  --color-clinic-primary: var(--clinic-primary);
-  --color-clinic-primary-hover: var(--clinic-primary-hover);
-
-  --color-clinic-secondary: var(--clinic-secondary);
-
-  --color-clinic-success: var(--clinic-success);
-  --color-clinic-success-soft: var(--clinic-success-soft);
-
-  --color-clinic-danger: var(--clinic-danger);
-  --color-clinic-danger-soft: var(--clinic-danger-soft);
-
-  --color-clinic-pending: var(--clinic-pending);
-  --color-clinic-pending-soft: var(--clinic-pending-soft);
-
-  --color-clinic-text-primary: var(--clinic-text-primary);
-  --color-clinic-text-secondary: var(--clinic-text-secondary);
-
-  --color-clinic-border: var(--clinic-border);
-
-  /* Typography */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-
-  --text-h1: 48px;
-  --text-h1--line-height: 56px;
-
-  --text-h2: 36px;
-  --text-h2--line-height: 44px;
-
-  --text-h3: 24px;
-  --text-h3--line-height: 32px;
-
-  --text-body: 18px;
-  --text-body--line-height: 28px;
-
-  --text-small: 15px;
-  --text-small--line-height: 22px;
+  /* Avatar palette (PAL في الـ HTML) */
+  --color-av-amber-bg: #fde3b4;
+  --color-av-amber-fg: #6b4200;
+  --color-av-teal-bg: #d3f1ec;
+  --color-av-teal-fg: #0b4d46;
+  --color-av-lilac-bg: #e0dcf8;
+  --color-av-lilac-fg: #33307a;
+  --color-av-rose-bg: #f8d9d7;
+  --color-av-rose-fg: #7d211d;
+  --color-av-sage-bg: #dcebd2;
+  --color-av-sage-fg: #2f4a25;
+  --color-av-mint-bg: #bfeee6;
+  --color-av-mint-fg: #0b4d46;
+  --color-av-owner-bg: #f5b84a;
+  --color-av-owner-fg: #4a2f00;
 
   /* Radius */
-  --radius-sm: var(--clinic-radius-sm);
-  --radius-md: var(--clinic-radius-md);
-  --radius-lg: var(--clinic-radius-lg);
-  --radius-pill: var(--clinic-radius-pill);
+  --radius-control: 14px;
+  --radius-card: 24px;
+  --radius-role: 18px;
+  --radius-pill: 999px;
 
-  /* Shadows */
-  --shadow-clinic-sm: var(--clinic-shadow-sm);
-  --shadow-clinic-md: var(--clinic-shadow-md);
-  --shadow-clinic-lg: var(--clinic-shadow-lg);
+  /* Shadow */
+  --shadow-card: 0 14px 34px -18px rgba(11, 42, 46, 0.28);
 
-  /* Spacing scale */
-  --spacing-1: 4px;
-  --spacing-2: 8px;
-  --spacing-3: 12px;
-  --spacing-4: 16px;
-  --spacing-6: 24px;
-  --spacing-8: 32px;
-  --spacing-10: 40px;
-  --spacing-12: 48px;
-  --spacing-16: 64px;
+  /* Fonts */
+  --font-display:
+    "Bricolage Grotesque", "Plus Jakarta Sans", "IBM Plex Sans Arabic",
+    system-ui, sans-serif;
+  --font-body:
+    "Plus Jakarta Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-arabic:
+    "IBM Plex Sans Arabic", "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
-/* ---------------------------------------------------------
-   4. Manual Dark Mode
-   --------------------------------------------------------- */
-
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* ---------------------------------------------------------
-   5. Global HTML / Body
-   --------------------------------------------------------- */
-
-html,
-body {
-  min-height: 100%;
-}
-
-html {
-  background-color: var(--clinic-bg);
-}
-
-body {
-  margin: 0;
-  background-color: var(--clinic-bg);
-  color: var(--clinic-text-primary);
-  font-family: var(--font-sans);
-}
-
-/* ---------------------------------------------------------
-   6. Box sizing
-   --------------------------------------------------------- */
+/* ---------- Base ---------- */
 
 *,
 *::before,
@@ -194,37 +99,114 @@ body {
   box-sizing: border-box;
 }
 
-/* ---------------------------------------------------------
-   7. Focus Accessibility
-   --------------------------------------------------------- */
-
-:focus-visible {
-  outline: 2px solid var(--clinic-primary);
-  outline-offset: 2px;
+html {
+  background: var(--color-bg);
+  color-scheme: light;
 }
 
-/* ---------------------------------------------------------
-   8. Form controls inherit typography
-   --------------------------------------------------------- */
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
 
 button,
 input,
-textarea,
-select {
+select,
+textarea {
   font: inherit;
+  color: inherit;
 }
 
-/* ---------------------------------------------------------
-   9. Reduced motion
-   --------------------------------------------------------- */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(26px, 3.2vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+img {
+  max-width: 100%;
+}
+
+[hidden]:not([hidden="until-found" i]) {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-mint);
+  outline-offset: 2px;
+}
+
+/* ---------- Arabic / RTL ---------- */
+
+[dir="rtl"] body {
+  font-family: var(--font-arabic);
+}
+
+[dir="rtl"] .eyebrow,
+[dir="rtl"] .lbl,
+[dir="rtl"] th {
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .flip {
+  transform: scaleX(-1);
+}
+
+/* ---------- Shared text utilities ---------- */
+
+.eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.lbl {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
