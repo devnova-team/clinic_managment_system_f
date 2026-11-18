@@ -82,9 +82,9 @@
   --shadow-card: 0 14px 34px -18px rgba(11, 42, 46, 0.28);
 
   /* Fonts */
+ /* Fonts */
   --font-display:
-    "Bricolage Grotesque", "Plus Jakarta Sans", "IBM Plex Sans Arabic",
-    system-ui, sans-serif;
+    "Plus Jakarta Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-body:
     "Plus Jakarta Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-arabic:
@@ -92,6 +92,12 @@
 }
 
 /* ---------- Base ---------- */
+:root {
+  --clinic-primary: var(--color-brand);
+  --clinic-primary-hover: var(--color-bar-hi);
+  --clinic-primary-soft: var(--color-soft);
+  --clinic-ink: var(--color-ink);
+}
 
 *,
 *::before,

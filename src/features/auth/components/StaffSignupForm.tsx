@@ -1,19 +1,14 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
-
 import {
-  FiActivity,
   FiArrowRight,
   FiEye,
   FiEyeOff,
   FiPlus,
   FiUserPlus,
 } from "react-icons/fi";
-
 import { FaStethoscope } from "react-icons/fa";
-
 import {
   signupSpecialties,
   signupTranslations,
@@ -21,16 +16,17 @@ import {
 } from "@/locales/signup";
 
 type StaffRole = "receptionist" | "doctor";
+
 type ApiResponse = { message?: string };
 
 const fieldLabelClass =
-  "block text-xs font-bold uppercase tracking-[0.1em] text-clinic-text-secondary";
+  "block text-xs font-bold uppercase tracking-[0.1em] text-muted";
 
 const inputClass =
-  "min-h-12 w-full rounded-md border border-clinic-border bg-clinic-surface px-[var(--spacing-4)] py-[var(--spacing-3)] text-sm text-clinic-text-primary shadow-clinic-sm outline-none transition placeholder:text-[var(--clinic-slate-400)] focus:border-clinic-primary-hover focus:ring-2 focus:ring-clinic-primary/25";
+  "min-h-12 w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-ink shadow-sm outline-none transition placeholder:text-muted/60 focus:border-brand focus:ring-2 focus:ring-mint/25";
 
 const roleCardClass =
-  "flex min-h-[136px] flex-col items-start rounded-lg border border-clinic-border bg-clinic-surface p-[var(--spacing-4)] text-start shadow-clinic-sm transition hover:border-clinic-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary";
+  "flex min-h-[136px] flex-col items-start rounded-lg border border-line bg-surface p-4 text-start shadow-sm transition hover:border-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint";
 
 export function StaffSignupForm() {
   const [language, setLanguage] = useState<SignupLanguage>("en");
@@ -83,7 +79,6 @@ export function StaffSignupForm() {
         /\/+$/,
         ""
       );
-
       const endpoint =
         process.env.NEXT_PUBLIC_STAFF_REGISTRATION_ENDPOINT ??
         `${apiBaseUrl}/owner/staff`;
@@ -126,111 +121,139 @@ export function StaffSignupForm() {
     }
   }
 
-  const selectedRoleClass =
-    "border-clinic-primary-hover bg-clinic-primary/10 ring-2 ring-clinic-primary";
+  const selectedRoleClass = "border-brand bg-mint/10 ring-2 ring-mint";
 
   return (
     <main
       lang={language}
       dir={isArabic ? "rtl" : "ltr"}
-      className="grid min-h-screen grid-cols-1 bg-clinic-bg font-sans text-clinic-text-primary lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]"
+      className="grid min-h-screen grid-cols-1 bg-bg font-body text-ink lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]"
     >
-      {/* Brand and page introduction */}
+      {/* Brand and page introduction (Left Side Updated to Match Image) */}
       <aside
         aria-label={t.system}
-        className="relative hidden min-h-screen flex-col justify-between overflow-hidden bg-[var(--clinic-slate-950)] px-[var(--spacing-12)] py-[var(--spacing-10)] text-white lg:flex"
+        className="relative hidden min-h-screen flex-col justify-between overflow-hidden bg-rail px-12 py-12 text-white lg:flex xl:px-14"
       >
-        <div className="flex items-center gap-[var(--spacing-3)]">
-          <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-clinic-primary text-[var(--clinic-slate-950)]">
-            <FiPlus className="size-6" aria-hidden="true" />
+        {/* Top Logo */}
+        <div className="flex items-center gap-3.5">
+          <span className="grid size-12 shrink-0 place-items-center rounded-[14px] bg-mint text-mint-ink">
+            <FiPlus className="size-6 stroke-[2.5]" aria-hidden="true" />
           </span>
-
           <span className="flex flex-col">
-            <strong className="text-lg font-bold leading-tight text-white">
+            <strong className="font-display text-xl font-extrabold leading-tight tracking-tight text-white">
               My Clinic
             </strong>
-            <small className="text-xs text-white/70">{t.system}</small>
+            <small className="mt-0.5 text-xs font-medium text-rail-muted">
+              {t.system}
+            </small>
           </span>
         </div>
 
-        <div className="max-w-xl">
-          <span className="inline-flex rounded-full border border-clinic-primary/30 bg-white/10 px-[var(--spacing-3)] py-[var(--spacing-2)] text-xs font-bold text-clinic-primary">
-            {t.ownerNotice}
-          </span>
-
-          <h1 className="mt-[var(--spacing-4)] max-w-[12em] text-4xl font-extrabold leading-[1.08] tracking-tight text-white xl:text-h1">
+        {/* Center Content */}
+        <div className="my-auto flex w-full max-w-xl flex-col items-start py-12">
+          <h1 className="max-w-[11.5em] font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.02em] text-white xl:text-[50px]">
             {t.heroTitle}
           </h1>
 
-          <p className="mt-[var(--spacing-4)] max-w-lg text-base leading-7 text-white/70 xl:text-body">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-rail-text">
             {t.heroText}
           </p>
 
-          <div className="mt-[var(--spacing-6)] flex flex-wrap items-center gap-[var(--spacing-2)] text-sm font-semibold">
-            <span className="rounded-full bg-white/10 px-[var(--spacing-4)] py-[var(--spacing-2)]">
+          <div className="mt-7 flex items-center gap-1 text-xs font-semibold text-rail-ink">
+            <span className="rounded-full border border-white/10 bg-rail-soft px-4 py-2">
               {t.reception}
             </span>
-
-            <FiArrowRight className="text-clinic-primary" aria-hidden="true" />
-
-            <span className="rounded-full bg-white/10 px-[var(--spacing-4)] py-[var(--spacing-2)]">
+            <FiArrowRight
+              className="flip size-3.5 text-mint"
+              aria-hidden="true"
+            />
+            <span className="rounded-full border border-white/10 bg-rail-soft px-4 py-2">
               {t.queue}
             </span>
-
-            <FiArrowRight className="text-clinic-primary" aria-hidden="true" />
-
-            <span className="rounded-full bg-white/10 px-[var(--spacing-4)] py-[var(--spacing-2)]">
+            <FiArrowRight
+              className="flip size-3.5 text-mint"
+              aria-hidden="true"
+            />
+            <span className="rounded-full border border-white/10 bg-rail-soft px-4 py-2">
               {t.consultation}
             </span>
-
-            <FiArrowRight className="text-clinic-primary" aria-hidden="true" />
-
-            <span className="rounded-full bg-white/10 px-[var(--spacing-4)] py-[var(--spacing-2)]">
+            <FiArrowRight
+              className="flip size-3.5 text-mint"
+              aria-hidden="true"
+            />
+            <span className="rounded-full border border-white/10 bg-rail-soft px-4 py-2">
               {t.billing}
             </span>
           </div>
-
-          <p className="mt-[var(--spacing-4)] max-w-lg text-sm leading-6 text-white/65">
-            {t.ownerNoticeText}
-          </p>
         </div>
 
-        <div className="flex items-center justify-between text-clinic-primary/80">
-          <FiActivity className="h-16 w-16" aria-hidden="true" />
-
-          <span className="text-xs font-semibold tracking-[0.16em] text-white/45">
-            MY CLINIC · STAFF ACCESS
-          </span>
+        {/* Bottom ECG Pulse Line */}
+        <div className="w-full pt-4" aria-hidden="true">
+          <svg
+            viewBox="0 0 600 100"
+            className="h-24 w-full overflow-visible"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Outer Soft Glow */}
+            <path
+              d="M 0 60 L 160 60 L 178 14 L 198 88 L 218 28 L 236 60 L 340 60 L 355 34 L 375 76 L 388 60 L 600 60"
+              stroke="var(--color-mint)"
+              strokeWidth="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="opacity-20 blur-[5px]"
+            />
+            {/* Main Crisp ECG Line */}
+            <path
+              d="M 0 60 L 160 60 L 178 14 L 198 88 L 218 28 L 236 60 L 340 60 L 355 34 L 375 76 L 388 60 L 600 60"
+              stroke="var(--color-mint)"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Pulse Node & Ring */}
+            <circle
+              cx="388"
+              cy="60"
+              r="14"
+              stroke="var(--color-mint)"
+              strokeWidth="1.5"
+              className="opacity-35"
+            />
+            <circle
+              cx="388"
+              cy="60"
+              r="5.5"
+              fill="var(--color-mint)"
+            />
+          </svg>
         </div>
       </aside>
 
       {/* Signup form */}
-      <section className="flex min-h-screen items-center justify-center px-4 py-6 sm:px-6 lg:px-[var(--spacing-8)] lg:py-[var(--spacing-8)]">
+      <section className="flex min-h-screen items-center justify-center px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-[640px] rounded-lg border border-clinic-border bg-clinic-surface p-6 shadow-clinic-lg sm:p-[var(--spacing-8)] xl:p-[var(--spacing-10)]"
+          className="w-full max-w-[640px] rounded-lg border border-line bg-surface p-6 shadow-card sm:p-8 xl:p-10"
         >
-          <div className="mb-[var(--spacing-4)] flex items-center justify-between gap-3 lg:hidden">
+          <div className="mb-4 flex items-center justify-between gap-3 lg:hidden">
             <div className="flex items-center gap-2">
-              <span className="grid size-9 place-items-center rounded-md bg-clinic-primary text-[var(--clinic-slate-950)]">
+              <span className="grid size-9 place-items-center rounded-md bg-mint text-mint-ink">
                 <FiPlus className="size-5" aria-hidden="true" />
               </span>
-
               <strong className="text-base font-bold">My Clinic</strong>
             </div>
-
-            <span className="text-xs text-clinic-text-secondary">
-              {t.system}
-            </span>
+            <span className="text-xs text-muted">{t.system}</span>
           </div>
 
           <div className="flex items-center justify-between gap-4">
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-clinic-primary-hover">
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-brand">
               {t.system}
             </span>
 
             <div
-              className="inline-flex shrink-0 gap-1 rounded-md border border-clinic-border bg-clinic-bg p-1"
+              className="inline-flex shrink-0 gap-1 rounded-md border border-line bg-bg p-1"
               role="group"
               aria-label="Language"
             >
@@ -238,10 +261,10 @@ export function StaffSignupForm() {
                 type="button"
                 aria-pressed={language === "en"}
                 onClick={() => setLanguage("en")}
-                className={`rounded-md px-4 py-2 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary ${
+                className={`rounded-md px-4 py-2 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint ${
                   language === "en"
-                    ? "bg-clinic-primary text-[var(--clinic-slate-950)] shadow-clinic-sm"
-                    : "text-clinic-text-secondary hover:bg-clinic-primary/10"
+                    ? "bg-mint text-mint-ink shadow-sm"
+                    : "text-muted hover:bg-mint/10"
                 }`}
               >
                 EN
@@ -251,10 +274,10 @@ export function StaffSignupForm() {
                 type="button"
                 aria-pressed={language === "ar"}
                 onClick={() => setLanguage("ar")}
-                className={`rounded-md px-4 py-2 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary ${
+                className={`rounded-md px-4 py-2 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint ${
                   language === "ar"
-                    ? "bg-clinic-primary text-[var(--clinic-slate-950)] shadow-clinic-sm"
-                    : "text-clinic-text-secondary hover:bg-clinic-primary/10"
+                    ? "bg-mint text-mint-ink shadow-sm"
+                    : "text-muted hover:bg-mint/10"
                 }`}
               >
                 عربي
@@ -262,34 +285,34 @@ export function StaffSignupForm() {
             </div>
           </div>
 
-          <h2 className="mt-[var(--spacing-6)] text-3xl font-extrabold leading-tight tracking-tight text-clinic-text-primary sm:text-h2">
+          <h2 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-h2">
             {t.title}
           </h2>
 
-          <p className="mt-[var(--spacing-2)] text-sm leading-6 text-clinic-text-secondary sm:text-small">
+          <p className="mt-2 text-sm leading-6 text-muted sm:text-base">
             {t.subtitle}
           </p>
 
-          <div className="mb-[var(--spacing-3)] mt-[var(--spacing-6)] text-xs font-bold uppercase tracking-[0.1em] text-clinic-text-secondary">
+          <div className="mb-3 mt-6 text-xs font-bold uppercase tracking-[0.1em] text-muted">
             {t.accountType}
           </div>
 
-          <div className="grid grid-cols-1 gap-[var(--spacing-3)] sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <button
               type="button"
               aria-pressed={role === "receptionist"}
               onClick={() => changeRole("receptionist")}
-              className={`${roleCardClass} ${role === "receptionist" ? selectedRoleClass : ""}`}
+              className={`${roleCardClass} ${
+                role === "receptionist" ? selectedRoleClass : ""
+              }`}
             >
-              <span className="mb-[var(--spacing-2)] grid size-10 place-items-center rounded-md bg-clinic-primary/10 text-clinic-primary-hover">
+              <span className="mb-2 grid size-10 place-items-center rounded-md bg-mint/10 text-brand">
                 <FiUserPlus className="size-5" aria-hidden="true" />
               </span>
-
-              <strong className="text-sm font-bold text-clinic-text-primary">
+              <strong className="text-sm font-bold text-ink">
                 {t.reception}
               </strong>
-
-              <span className="mt-1 text-xs leading-5 text-clinic-text-secondary">
+              <span className="mt-1 text-xs leading-5 text-muted">
                 {t.receptionDescription}
               </span>
             </button>
@@ -298,28 +321,27 @@ export function StaffSignupForm() {
               type="button"
               aria-pressed={role === "doctor"}
               onClick={() => changeRole("doctor")}
-              className={`${roleCardClass} ${role === "doctor" ? selectedRoleClass : ""}`}
+              className={`${roleCardClass} ${
+                role === "doctor" ? selectedRoleClass : ""
+              }`}
             >
-              <span className="mb-[var(--spacing-2)] grid size-10 place-items-center rounded-md bg-clinic-primary/10 text-clinic-primary-hover">
+              <span className="mb-2 grid size-10 place-items-center rounded-md bg-mint/10 text-brand">
                 <FaStethoscope className="size-5" aria-hidden="true" />
               </span>
-
-              <strong className="text-sm font-bold text-clinic-text-primary">
+              <strong className="text-sm font-bold text-ink">
                 {t.doctor}
               </strong>
-
-              <span className="mt-1 text-xs leading-5 text-clinic-text-secondary">
+              <span className="mt-1 text-xs leading-5 text-muted">
                 {t.doctorDescription}
               </span>
             </button>
           </div>
 
-          <div className="mt-[var(--spacing-4)] flex flex-col gap-[var(--spacing-4)] rounded-lg border border-clinic-border bg-clinic-primary/10 p-[var(--spacing-4)] sm:p-[var(--spacing-6)]">
+          <div className="mt-4 flex flex-col gap-4 rounded-lg border border-line bg-mint/10 p-4 sm:p-6">
             <div className="flex flex-col gap-2">
               <label className={fieldLabelClass} htmlFor="staff-full-name">
                 {t.fullName}
               </label>
-
               <input
                 id="staff-full-name"
                 className={inputClass}
@@ -337,7 +359,6 @@ export function StaffSignupForm() {
                   <label className={fieldLabelClass} htmlFor="staff-specialty">
                     {t.specialty}
                   </label>
-
                   <select
                     id="staff-specialty"
                     value={specialty}
@@ -356,7 +377,6 @@ export function StaffSignupForm() {
                   <label className={fieldLabelClass} htmlFor="staff-syndicate">
                     {t.syndicateCard}
                   </label>
-
                   <input
                     id="staff-syndicate"
                     className={inputClass}
@@ -374,11 +394,10 @@ export function StaffSignupForm() {
             )}
           </div>
 
-          <div className="mt-[var(--spacing-4)] flex flex-col gap-2">
+          <div className="mt-4 flex flex-col gap-2">
             <label className={fieldLabelClass} htmlFor="staff-username">
               {t.username}
             </label>
-
             <input
               id="staff-username"
               className={inputClass}
@@ -390,11 +409,10 @@ export function StaffSignupForm() {
             />
           </div>
 
-          <div className="mt-[var(--spacing-4)] flex flex-col gap-2">
+          <div className="mt-4 flex flex-col gap-2">
             <label className={fieldLabelClass} htmlFor="staff-password">
               {t.password}
             </label>
-
             <div className="relative">
               <input
                 id="staff-password"
@@ -407,10 +425,9 @@ export function StaffSignupForm() {
                 minLength={8}
                 required
               />
-
               <button
                 type="button"
-                className="absolute inset-y-0 end-2 grid w-9 place-items-center rounded-md text-clinic-text-secondary transition hover:bg-clinic-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary"
+                className="absolute inset-y-0 end-2 grid w-9 place-items-center rounded-md text-muted transition hover:bg-mint/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint"
                 onClick={() => setShowPassword((current) => !current)}
                 aria-label={showPassword ? t.hidePassword : t.showPassword}
               >
@@ -423,14 +440,13 @@ export function StaffSignupForm() {
             </div>
           </div>
 
-          <div className="mt-[var(--spacing-4)] flex flex-col gap-2">
+          <div className="mt-4 flex flex-col gap-2">
             <label
               className={fieldLabelClass}
               htmlFor="staff-confirm-password"
             >
               {t.confirmPassword}
             </label>
-
             <div className="relative">
               <input
                 id="staff-confirm-password"
@@ -443,10 +459,9 @@ export function StaffSignupForm() {
                 minLength={8}
                 required
               />
-
               <button
                 type="button"
-                className="absolute inset-y-0 end-2 grid w-9 place-items-center rounded-md text-clinic-text-secondary transition hover:bg-clinic-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary"
+                className="absolute inset-y-0 end-2 grid w-9 place-items-center rounded-md text-muted transition hover:bg-mint/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint"
                 onClick={() =>
                   setShowConfirmPassword((current) => !current)
                 }
@@ -465,7 +480,7 @@ export function StaffSignupForm() {
 
           {errorMessage && (
             <p
-              className="mt-[var(--spacing-4)] rounded-md border border-clinic-danger bg-clinic-danger-soft px-[var(--spacing-4)] py-[var(--spacing-3)] text-sm leading-6 text-clinic-danger"
+              className="mt-4 rounded-md border border-danger bg-danger/10 px-4 py-3 text-sm leading-6 text-danger"
               role="alert"
             >
               {errorMessage}
@@ -474,7 +489,7 @@ export function StaffSignupForm() {
 
           {successMessage && (
             <p
-              className="mt-[var(--spacing-4)] rounded-md border border-clinic-success bg-clinic-success-soft px-[var(--spacing-4)] py-[var(--spacing-3)] text-sm leading-6 text-clinic-success"
+              className="mt-4 rounded-md border border-ok bg-soft px-4 py-3 text-sm leading-6 text-ok"
               role="status"
             >
               {successMessage}
@@ -482,10 +497,9 @@ export function StaffSignupForm() {
           )}
 
           <button
-            className="mt-[var(--spacing-6)] inline-flex min-h-12 w-full items-center justify-center rounded-md bg-clinic-primary px-[var(--spacing-6)] py-[var(--spacing-3)] text-sm font-bold text-[var(--clinic-slate-950)] shadow-clinic-sm transition hover:bg-clinic-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clinic-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-mint px-6 py-3 text-sm font-bold text-mint-ink shadow-sm transition hover:bg-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             type="submit"
-            disabled={isSubmitting}
-          >
+            disabled={isSubmitting} >
             {isSubmitting ? t.creating : t.createAccount}
           </button>
         </form>
