@@ -55,22 +55,20 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Bottom ECG Graphic & Feature Pills */}
         <div className="space-y-8">
-          {/* ECG Pulse Wave SVG with Subtle Grid */}
+         
           <div className="w-full overflow-hidden">
             <svg
               viewBox="0 0 600 130"
               fill="none"
               className="w-full h-auto max-w-[600px]"
             >
-              {/* Horizontal Grid Lines */}
+             
               <line x1="0" y1="15" x2="600" y2="15" stroke="#133E46" strokeWidth="1" />
               <line x1="0" y1="50" x2="600" y2="50" stroke="#133E46" strokeWidth="1" />
               <line x1="0" y1="85" x2="600" y2="85" stroke="#133E46" strokeWidth="1" />
               <line x1="0" y1="120" x2="600" y2="120" stroke="#133E46" strokeWidth="1" />
 
-              {/* Vertical Grid Lines */}
               {[75, 150, 225, 300, 375, 450, 525].map((x) => (
                 <line
                   key={x}
@@ -83,7 +81,6 @@ export default function LoginPage() {
                 />
               ))}
 
-              {/* ECG Line */}
               <path
                 d="M0 85 H140 L155 53 L170 120 L198 10 L220 115 L232 75 L245 85 H315 L330 65 L345 105 L355 85 H600"
                 stroke="#2ED1C6"
@@ -92,7 +89,6 @@ export default function LoginPage() {
                 strokeLinejoin="round"
               />
 
-              {/* Orange Peak Point */}
               <circle
                 cx="198"
                 cy="10"
@@ -104,14 +100,13 @@ export default function LoginPage() {
             </svg>
           </div>
 
-          {/* Feature Pills */}
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex items-center gap-2.5">
             {featurePills.map((pill) => (
               <div
                 key={pill}
                 className="inline-flex items-center gap-2 rounded-full bg-[#0E3842] px-4 py-2 text-xs font-medium text-white border border-white/5"
               >
-                <span className="h-2 w-2 rounded-full bg-[#2ED1C6]" />
+                <span className="h-2 w-3 rounded-full bg-[#2ED1C6]" />
                 <span>{pill}</span>
               </div>
             ))}
@@ -119,7 +114,6 @@ export default function LoginPage() {
         </div>
       </section>
 
-      {/* ==================== Right Side: Login Card Area ==================== */}
       <section className="flex items-center justify-center p-6 sm:p-12">
         <LoginForm />
       </section>
