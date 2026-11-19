@@ -22,10 +22,6 @@ import {
 
   FiList,
 
-  FiLogOut,
-
-  FiPlus,
-
   FiUser,
 
   FiUserPlus,
@@ -37,8 +33,6 @@ import {
 import { profileAccessByRole, profileTranslations } from "@/locales/profile";
 
 import type {
-
-  ProfileAccessKey,
 
   ProfileLanguage,
 
@@ -95,16 +89,6 @@ const accessIcons = {
   consultation: FiActivity,
 
   profile: FiUser,
-
-};
-
-const navigationByRole: Record<ProfileRole, ProfileAccessKey[]> = {
-
-  reception: ["receptionBooking", "queue", "billing", "profile"],
-
-  doctor: ["dashboard", "consultation", "profile"],
-
-  owner: ["dashboard", "profile"],
 
 };
 
@@ -234,186 +218,12 @@ export function ProfilePage() {
 
   };
 
-  const menuKeys = navigationByRole[role];
-
   const accessKeys = profileAccessByRole[role];
-
-  return (
-
-    <div
-
-      dir={isArabic ? "rtl" : "ltr"}
-
-      lang={language}
-
-      className="min-h-screen w-full overflow-x-hidden bg-bg font-body text-ink"
-
-    >
-
-      <div className="min-h-screen lg:grid lg:grid-cols-[17rem_1fr]">
-
-        <aside className="flex min-h-0 flex-col gap-5 bg-rail px-3 py-4 text-white lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:px-4 lg:py-5">
-
-          <div className="flex items-center gap-3">
-
-            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-mint text-mint-ink shadow-sm">
-
-              <FiPlus size={22} strokeWidth={2.8} />
-
-            </span>
-
-            <span className="min-w-0">
-
-              <strong className="block text-sm font-extrabold leading-tight">My Clinic</strong>
-
-              <span className="mt-0.5 block whitespace-nowrap text-[10px] leading-4 text-white/65">Clinic Management System</span>
-
-            </span>
-
-          </div>
-
-          <div className="min-w-0">
-
-            <p className="mb-2 px-2 text-[9px] font-bold uppercase tracking-[0.16em] text-white/50">
-
-              {t.navigation}
-
-            </p>
-
-            <nav aria-label={t.navigation} className="flex gap-1.5 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
-
-              {menuKeys.map((key) => {
-
-                const Icon = accessIcons[key];
-
-                const isActive = key === "profile";
-
-                return (
-
-                  <button
-
-                    key={key}
-
-                    type="button"
-
-                    onClick={() => {
-
-                      if (!isActive) setNotice(t.navigationPlaceholder);
-
-                      else setNotice("");
-
-                    }}
-
-                    aria-current={isActive ? "page" : undefined}
-
-                    className={`flex min-h-9 min-w-0 shrink-0 items-center gap-2.5 rounded-lg px-2.5 py-2 text-start text-xs font-semibold transition-colors lg:w-full ${
-
-                      isActive
-
-                        ? "bg-mint text-mint-ink shadow-sm"
-
-                        : "text-white/75 hover:bg-white/10 hover:text-white"
-
-                    }`}
-
-                  >
-
-                    <Icon size={15} className="shrink-0" />
-
-                    <span className="min-w-0 truncate">{t.access[key]}</span>
-
-                  </button>
-
-                );
-
-              })}
-
-            </nav>
-
-          </div>
-
-          <div className="mt-auto hidden shrink-0 lg:block">
-
-            <p className="mb-2 px-2 text-[9px] font-bold uppercase tracking-[0.16em] text-white/50">
-
-              {t.previewAs}
-
-            </p>
-
-            <div className="flex flex-wrap gap-1.5">
-
-              {(["owner", "reception", "doctor"] as const).map((item) => (
-
-                <button
-
-                  key={item}
-
-                  type="button"
-
-                  onClick={() => changeRole(item)}
-
-                  aria-pressed={role === item}
-
-                  className={`rounded-lg border px-2 py-1.5 text-[10px] font-semibold whitespace-nowrap transition-colors ${
-
-                    role === item
-
-                      ? "border-mint bg-mint text-mint-ink"
-
-                      : "border-white/15 bg-transparent text-white/70 hover:bg-white/10"
-
-                  }`}
-
-                >
-
-                  {t.roles[item]}
-
-                </button>
-
-              ))}
-
-            </div>
-
-          </div>
-
-          <div className="flex shrink-0 items-center gap-2.5 rounded-xl bg-white/[0.06] p-2.5">
-
-            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-mint text-xs font-extrabold text-mint-ink">
-
-              {getInitials(activeUser.name)}
-
-            </span>
-
-            <span className="min-w-0 flex-1">
-
-              <strong className="block truncate text-xs font-bold text-white">{activeUser.name}</strong>
-
-              <span className="block text-[10px] text-white/60">{t.roles[role]}</span>
-
-            </span>
-
-          </div>
-
-          <a
-
-            href="/login"
-
-            className="flex min-h-8 shrink-0 items-center gap-2.5 rounded-lg px-2.5 text-xs font-semibold text-white/70 transition hover:bg-white/10 hover:text-white"
-
-          >
-
-            <FiLogOut size={17} />
-
-            {t.logout}
-
-          </a>
-
-        </aside>
-
-        <main className="min-h-screen min-w-0 px-4 py-5 sm:px-5 lg:px-7 lg:py-6">
-
-          <div className="mx-auto w-full max-w-[1360px]">
-
+return (
+  <div
+    dir={isArabic ? "rtl" : "ltr"}
+    lang={language}
+    className="w-full overflow-x-hidden bg-bg font-body text-ink">
             <header className="mb-5 flex flex-wrap items-start justify-between gap-3">
 
               <div>
@@ -808,9 +618,7 @@ export function ProfilePage() {
 
                         : "border-line bg-bg text-muted"
 
-                    }`}
-
-                  >
+                    }`}>
 
                     {t.roles[item]}
 
@@ -823,12 +631,6 @@ export function ProfilePage() {
             </div>
 
           </div>
-
-        </main>
-
-      </div>
-
-    </div>
 
   );
 
