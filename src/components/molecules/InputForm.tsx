@@ -1,6 +1,6 @@
 "use client";
 import { forwardRef, useState } from "react";
-import { Eye, EyeOff } from "@/assets/icons";
+import { Eye, EyeOff } from "@/assets/icons/icons";
 
 const cx = (...classes: Array<string | false | null | undefined>) =>
   classes.filter(Boolean).join(" ");
