@@ -1,4 +1,3 @@
-
 import type { ComponentProps } from "react";
 import { Icon } from "@iconify/react";
 
@@ -44,6 +43,8 @@ import {
   Upload,
   CircleDot,
   EllipsisVertical,
+  TrendingUp,
+  UserCheck,
   CalendarIcon,
 
   // New Lucide React icons
@@ -120,6 +121,8 @@ export {
   Send,
   CircleDot,
   EllipsisVertical,
+  TrendingUp,
+  UserCheck,
   CalendarIcon,
 
   // New exports
@@ -134,4 +137,3 @@ export {
   RefreshCw,
   Search,
 };
-
