@@ -4,7 +4,7 @@ import Button from "@/components/atoms/Button";
 import { useT } from "@/lib/i18n/useT";
 import { useCurrentUser } from "@/features/auth/hooks/useCurrentUser";
 
-const ROLES = ["owner", "receptionist", "doctor"] as const;
+const ROLES = ["owner", "reception", "doctor"] as const;
 
 export default function PreviewAs() {
   const t = useT();
