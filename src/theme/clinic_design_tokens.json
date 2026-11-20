@@ -81,5 +81,5 @@
     "tablet": "640px–1023px",
     "desktop": ">= 1024px"
   },
-  "roles": ["Owner", "Receptionist", "Doctor", "Patient"]
+  "roles": ["Owner", "Reception", "Doctor"]
 }
