@@ -24,15 +24,15 @@ export const NAV: Record<Role, NavItem[]> = {
     { href: '/profile',      labelKey: 'nav_profile', icon: 'user',  match: '/profile' },
   ],
   owner: [
-    { href: '/dashboard', labelKey: 'nav_dash',    icon: 'grid', match: '/dashboard' },
-    { href: '/profile',   labelKey: 'nav_profile', icon: 'user', match: '/profile' },
+    { href: '/owner', labelKey: 'nav_dash', icon: 'grid', match: '/owner' },
+    // { href: '/profile',   labelKey: 'nav_profile', icon: 'user', match: '/profile' },
   ],
 };
 
 export const HOME_BY_ROLE: Record<Role, string> = {
   reception: '/reception',
   doctor: '/dashboard',
-  owner: '/dashboard',
+  owner: '/owner',
 };
 
 /** /reception/invoices/123 بتفعّل "الحجز والاستقبال" */
@@ -41,6 +41,9 @@ export function isActive(pathname: string, item: NavItem) {
 }
 
 export function canAccess(role: Role, pathname: string) {
+  const items = NAV[role];
+  if (!items) return false;
+  
   const allowed = NAV[role].some((item) => isActive(pathname, item));
   return allowed || pathname.startsWith('/consultation/') && role === 'doctor';
 }
