@@ -1,5 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
+
 export type CurrentUser = {
   id: string;
   name: string;
@@ -17,6 +20,28 @@ const MOCK_USER: CurrentUser = {
   specialtyKey: "sp_amr",
 };
 
+const ROLE_NAMES: Record<CurrentUser["role"], string> = {
+  owner: "Dr. Amr Hassan",
+  reception: "Sara Mohamed",
+  doctor: "Dr. Layla Samir",
+};
+
 export function useCurrentUser(): CurrentUser {
-  return MOCK_USER;
+ const [user, setUser] = useState<CurrentUser>(MOCK_USER);
+
+  useEffect(() => {
+    const previewRole = localStorage.getItem(
+      "preview-role"
+    ) as CurrentUser["role"] | null;
+
+    if (previewRole) {
+      setUser({
+        ...MOCK_USER,
+        role: previewRole,
+        name: ROLE_NAMES[previewRole],
+      });
+    }
+  }, []);
+
+  return user;
 }
