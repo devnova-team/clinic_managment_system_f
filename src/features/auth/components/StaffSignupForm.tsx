@@ -15,7 +15,7 @@ import {
   type SignupLanguage,
 } from "@/locales/signup";
 
-type StaffRole = "receptionist" | "doctor";
+type StaffRole = "reception" | "doctor";
 
 type ApiResponse = { message?: string };
 
@@ -300,10 +300,10 @@ export function StaffSignupForm() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <button
               type="button"
-              aria-pressed={role === "receptionist"}
-              onClick={() => changeRole("receptionist")}
+              aria-pressed={role === "reception"}
+              onClick={() => changeRole("reception")}
               className={`${roleCardClass} ${
-                role === "receptionist" ? selectedRoleClass : ""
+                role === "reception" ? selectedRoleClass : ""
               }`}
             >
               <span className="mb-2 grid size-10 place-items-center rounded-md bg-mint/10 text-brand">
